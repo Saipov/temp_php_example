@@ -1,0 +1,52 @@
+{{ form_start(form,  {'attr':{'class': "card"}}) }}
+<div class="card-header">
+    <h4 class="card-title">{{ title_label|default('Новый элемент') }}</h4>
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="mb-3">
+                {{ form_label(form.title, null, {
+                    'label': 'Название',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="mb-3">
+                <label class="form-check form-check-inline">
+                    {{ form_widget(form.is_active, { 'attr': {'class': 'form-check-input'} }) }}
+                    <span class="form-check-label">Активность</span>
+                </label>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.anonce, null, {
+                    'label': 'Анонс',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.anonce, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.imageFile, null, {
+                    'label': 'Изображение',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.imageFile, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.url, null, {
+                    'label': 'Ссылка на страницу перехода',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.url, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-footer text-right">
+    <div class="d-flex">
+        <a href="{{ path('Slider_index') }}" class="btn btn-link">Отмена</a>
+        <button class="btn btn-primary ml-auto">{{ button_label|default('Сохранить') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

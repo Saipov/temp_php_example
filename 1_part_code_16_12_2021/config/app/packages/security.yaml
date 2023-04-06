@@ -1,0 +1,39 @@
+security:
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    app_security_user_provider:
+      id: App\Security\UserProvider
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    authorization:
+      pattern: ^/account/authorization
+      security: false
+
+    # Отдаём файлы без авторизации
+    contacts_history_audio_file:
+      pattern: ^/contacts/history/(\d+)/audio
+      security: false
+
+    main:
+      anonymous: ~
+      stateless: true
+      provider: app_security_user_provider
+      guard:
+        authenticators:
+          - App\Security\Authenticator
+
+      # activate different ways to authenticate
+      # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+      # https://symfony.com/doc/current/security/impersonating_user.html
+      # switch_user: true
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+  # - { path: ^/admin, roles: ROLE_ADMIN }
+  # - { path: ^/profile, roles: ROLE_USER }

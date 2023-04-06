@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>{% block title %}Балтийский полимер- Панель управления{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <meta name="msapplication-TileColor" content="#206bc4"/>
+        <meta name="theme-color" content="#206bc4"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="HandheldFriendly" content="True"/>
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="robots" content="noindex,nofollow,noarchive"/>
+        <link rel="icon" href="/favicon.png" type="image/png"/>
+        <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        {% block stylesheets %}
+            <!-- Libs CSS -->
+
+
+            <!-- Tabler Core -->
+            <link rel="stylesheet" href="{{ asset('css/tabler.css') }}">
+            <!-- Tabler Plugins -->
+            <link rel="stylesheet" href="{{ asset('css/tabler-flags.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/tabler-payments.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/summernote-lite.min.css') }}">
+
+
+        {% endblock %}
+    </head>
+    <body class="antialiased">
+    <div class="page">
+        {{ include('./shared/nav.html.twig') }}
+        {{ include('./shared/header.html.twig') }}
+        <div class="content">
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        {{ include('./shared/footer.html.twig') }}
+    </div>
+        {% block javascripts %}
+
+        <!-- Tabler Core -->
+
+        <script src="{{ asset('js/summernote-lite.min.js') }}" ></script>
+        <script src="{{ asset('js/summernote-ru-RU.min.js') }}" ></script>
+            <script>
+                $(document).ready(function() {
+                    $('.editor').summernote({
+                        height: 300,
+                        lang: 'ru-RU'
+                    });
+                });
+            </script>
+        {% endblock %}
+    </body>
+</html>

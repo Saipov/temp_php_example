@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <h2 class="page-title">
+                    Каталог материалов
+                </h2>
+            </div>
+        </div>
+    </div>
+<div class="card">
+    <div class="card-header d-print-none">
+        <h3 class="card-title"></h3>
+        <div class="card-options">
+            <a href="{{ path('catalog_new') }}" class="btn btn-primary">Добавить</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Н</th>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Категория</th>
+                <th>Выводить на сайт</th>
+                <th>Новинка</th>
+                <th>Возможна скидка</th>
+                <th>Действия</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for catalog in catalogs %}
+            <tr>
+                <td>{{ catalog.id }}</td>
+                <td>  <img class="catalog-img" src="{{ vich_uploader_asset(catalog, 'imageFile') }}" alt=""></td>
+                <td>{{ catalog.title }}</td>
+                <td>{{ catalog.price /100}}</td>
+                <td>{{ catalog.category }}</td>
+                <td>{{ catalog.isActive ? '<span class="badge bg-green">да</span>' : 'НЕТ' }}</td>
+                <td>{{ catalog.isNew ? '<span class="badge bg-green">да</span>' : 'НЕТ' }}</td>
+                <td>{{ catalog.isSale ? '<span class="badge bg-green">да</span>' : 'НЕТ' }}</td>
+
+                <td>
+                    <div class="btn-list">
+                    <a href="{{ path('catalog_edit', {'id': catalog.id}) }}" class="btn btn-secondary">Редактировать</a>
+                    {{ include('catalog/_delete_form.html.twig') }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Нет ни одного материала</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

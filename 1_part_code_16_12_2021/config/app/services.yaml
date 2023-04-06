@@ -1,0 +1,88 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+  app.project_dir: '%kernel.project_dir%'
+  app.cache_dir: '%kernel.cache_dir%'
+  app.voters:
+    - App\Security\Voter\MainVoter
+  app.contact_file_domain: '%env(FILE_CONTACT_CACHE_DOMAIN)%'
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    bind:
+      $subscriberDomain: '%env(MERCURE_SUBSCRIBER)%'
+      $sseSubscriberDomain: '%env(MERCURE_SUBSCRIBER)%'
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  App\:
+    resource: '%kernel.project_dir%/src/'
+    exclude:
+      - '%kernel.project_dir%/src/DependencyInjection/'
+      - '%kernel.project_dir%/src/Entity/'
+      - '%kernel.project_dir%/src/Kernel.php'
+      - '%kernel.project_dir%/src/Tests/'
+      - '%kernel.project_dir%/src/Component/CommandBus/handlers.php'
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  App\Controller\App\:
+    resource: '%kernel.project_dir%/src/Controller/App'
+    tags: [ 'controller.service_arguments' ]
+
+  # add more service definitions when explicit configuration is needed
+  # please note that last definitions always *replace* previous ones
+
+  app.service.lib_phone_number:
+    class: App\Service\LibPhoneNumber
+
+  # https://github.com/snc/SncRedisBundle
+  Predis\Client: '@snc_redis.default'
+
+  App\Service\JWT:
+    arguments:
+      $jwt_key: '%env(JWT_KEY)%'
+      $jwt_exp: '%env(JWT_EXP)%'
+
+  App\EventListener\EntityContactListener:
+    tags:
+      - name: 'doctrine.orm.entity_listener'
+        event: 'preUpdate'
+        entity: App\Entity\Contact
+        lazy: true
+
+
+  App\EventListener\EntityReportListener:
+    tags:
+      - name: 'doctrine.orm.entity_listener'
+        event: 'postRemove'
+        entity: App\Entity\Report
+        lazy: true
+
+
+  # Сервис для определение временной зоны по номеру телефона
+  src.service.time_zone_by_phone:
+    class: App\Service\TimeZoneByPhone
+
+
+  # Логирование действий
+  Monolog\Processor\WebProcessor:
+    tags:
+      - { name: monolog.processor, handler: db }
+
+  Symfony\Bridge\Monolog\Processor\RouteProcessor:
+    tags:
+      - { name: monolog.processor, handler: db }
+
+  App\Classes\RequestProcessor:
+    tags:
+      - { name: monolog.processor, , method: processRecord, handler: db }
+
+  App\Service\LoggerDBHandler:
+    arguments: ['@doctrine.orm.entity_manager']

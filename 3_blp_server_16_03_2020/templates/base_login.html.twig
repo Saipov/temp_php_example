@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <meta name="msapplication-TileColor" content="#206bc4"/>
+        <meta name="theme-color" content="#206bc4"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <meta name="HandheldFriendly" content="True"/>
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="robots" content="noindex,nofollow,noarchive"/>
+        <link rel="icon" href="/favicon.png" type="image/png"/>
+        <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
+        {% block stylesheets %}
+            <!-- Libs CSS -->
+            <link rel="stylesheet" href="{{ asset('libs/jqvmap/dist/jqvmap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/selectize/dist/css/selectize.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/fullcalendar/core/main.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/fullcalendar/daygrid/main.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/fullcalendar/timegrid/main.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/fullcalendar/list/main.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/flatpickr/dist/flatpickr.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('libs/nouislider/distribute/nouislider.min.css') }}">
+            <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css" rel="stylesheet"/>
+            <!-- Tabler Core -->
+            <link rel="stylesheet" href="{{ asset('css/tabler.css') }}">
+            <!-- Tabler Plugins -->
+            <link rel="stylesheet" href="{{ asset('css/tabler-flags.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/tabler-payments.min.css') }}">
+
+
+        {% endblock %}
+    </head>
+    <body class="antialiased d-flex flex-column">
+    <div class="flex-fill d-flex flex-column justify-content-center">
+
+
+        <div class="container-tight py-6">
+            <div class="text-center mb-4">
+                <img src="{{ asset('images/logo.svg') }}" height="36" alt="">
+            </div>
+
+                {% block body %}{% endblock %}
+
+        </div>
+
+    </div>
+        {% block javascripts %}
+        <!-- Libs JS -->
+        <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('libs/jquery/dist/jquery.slim.min.js') }}"></script>
+        <!-- Tabler Core -->
+        <script src="{{ asset('js/tabler.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

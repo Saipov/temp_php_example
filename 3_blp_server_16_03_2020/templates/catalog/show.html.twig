@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block body %}
+    <h1>Catalog</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ catalog.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ catalog.title }}</td>
+            </tr>
+            <tr>
+                <th>Is_active</th>
+                <td>{{ catalog.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Is_new</th>
+                <td>{{ catalog.isNew ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Is_sale</th>
+                <td>{{ catalog.isSale ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Anonce</th>
+                <td>{{ catalog.anonce }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ catalog.content }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('catalog_index') }}">back to list</a>
+
+    <a href="{{ path('catalog_edit', {'id': catalog.id}) }}">edit</a>
+
+    {{ include('catalog/_delete_form.html.twig') }}
+{% endblock %}

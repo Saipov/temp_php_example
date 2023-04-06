@@ -1,0 +1,51 @@
+framework:
+  workflows:
+#    autodialer:
+#      type: "state_machine"
+#      marking_store:
+#        type: "method"
+#        property: "state"
+#      supports:
+#        - App\Entity\PullRequest
+#      initial_marking: start
+#      places:
+#        - init
+#        - calling
+#        - redirect
+#        - end
+#      transitions:
+#        call:
+#          from: init
+#          to: calling
+#        external_state:
+#          from: calling
+#          to: test
+#        internal_state:
+#          from: calling
+#          to: test
+#        redirect:
+#          from: calling
+#          to: test
+#        end:
+
+#    autodialer_call:
+#      type: "workflow" # or 'state_machine'
+#      audit_trail:
+#        enabled: true
+#      marking_store:
+#        type: "method"
+#        property: "marking"
+#      supports:
+#        - App\Entity\AutodialerCall
+#      initial_marking: new
+#      places:
+#        - new       # Начально состояние
+#        - process   # В процессе
+#        - complete  # Завершён
+#      transitions:
+#        process:           # Начать процесс обзвона
+#          from: new
+#          to: process
+#        complete:          # Завершить процесс обзвона
+#          from: process
+#          to: complete

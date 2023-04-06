@@ -1,0 +1,47 @@
+{{ form_start(form,  {'attr':{'class': "card"}}) }}
+<div class="card-header">
+    <h4 class="card-title">{{ title_label|default('Новый пользователь') }}</h4>
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="mb-3">
+                {{ form_label(form.email, null, {
+                    'label': 'E-mail',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.firstname, null, {
+                    'label': 'Имя',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.lastname, null, {
+                    'label': 'Фамилия',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.password, null, {
+                    'label': 'Пароль',
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+                {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-footer text-right">
+    <div class="d-flex">
+        <a href="{{ path('user_index') }}" class="btn btn-link">Отмена</a>
+        <button class="btn btn-primary ml-auto">{{ button_label|default('Сохранить') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

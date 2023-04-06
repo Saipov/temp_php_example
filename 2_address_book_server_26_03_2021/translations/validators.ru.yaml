@@ -1,0 +1,5 @@
+addressbook.first_name.not_blank: это поле обязательно для заполнения
+addressbook.last_name.not_blank: это поле обязательно для заполнения
+addressbook.desc.max_lenght: Превышена максимальная длинна примечания
+addressbook.date.not_valid: Не валидная дата дня рождения
+addressbook.email.not_valid: Укажите валидный адрес почты
